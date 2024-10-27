@@ -1,12 +1,13 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Calendar as CalendarIcon, MapPin, Phone, Mail, Search } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Separator } from "@/components/ui/separator"
-import { Calendar } from "@/components/ui/calendar"
+import { useState } from "react";
+import { useRouter } from "next/navigation"; // Import useRouter
+import { Calendar as CalendarIcon, MapPin, Phone, Mail, Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
+import { Calendar } from "@/components/ui/calendar";
 import {
   Dialog,
   DialogContent,
@@ -14,20 +15,20 @@ import {
   DialogTitle,
   DialogDescription,
   DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@/components/ui/dialog";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
-import { format } from "date-fns"
+} from "@/components/ui/popover";
+import { format } from "date-fns";
 
 // Mock data for restaurants
 const restaurants = [
   {
     id: 1,
     name: "The Melodic Bistro",
-    image: "/placeholder.svg?height=100&width=100",
+    image: "/tmb.png",
     location: "123 Harmony Street, Musicville",
     phone: "+1 (555) 123-4567",
     email: "contact@melodicbistro.com",
@@ -41,7 +42,7 @@ const restaurants = [
   {
     id: 2,
     name: "Rhythm & Bites",
-    image: "/placeholder.svg?height=100&width=100",
+    image: "/Rnb.png",
     location: "456 Beat Avenue, Groovetown",
     phone: "+1 (555) 987-6543",
     email: "info@rhythmandbites.com",
@@ -53,19 +54,23 @@ const restaurants = [
     ],
   },
   // Add more restaurants as needed
-]
+];
 
 export default function RestaurantCatalogue() {
-  const [searchTerm, setSearchTerm] = useState("")
-  const [date, setDate] = useState<Date>()
+  const router = useRouter(); // Initialize useRouter
+  const [searchTerm, setSearchTerm] = useState("");
+  const [date, setDate] = useState<Date>();
 
   const filteredRestaurants = restaurants.filter((restaurant) =>
     restaurant.name.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  );
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">Gigly Restaurant Catalogue</h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold">Gigly Restaurant Catalogue</h1>
+        <Button onClick={() => router.push("/")}>Back to Home</Button> {/* Button for navigation */}
+      </div>
       <div className="mb-6">
         <div className="relative">
           <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -138,9 +143,7 @@ export default function RestaurantCatalogue() {
                       <PopoverTrigger asChild>
                         <Button
                           variant={"outline"}
-                          className={`w-full justify-start text-left font-normal ${
-                            !date && "text-muted-foreground"
-                          }`}
+                          className={`w-full justify-start text-left font-normal ${!date && "text-muted-foreground"}`}
                         >
                           <CalendarIcon className="mr-2 h-4 w-4" />
                           {date ? format(date, "PPP") : "Pick a date"}
@@ -190,5 +193,5 @@ export default function RestaurantCatalogue() {
         ))}
       </div>
     </div>
-  )
+  );
 }

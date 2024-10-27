@@ -21,13 +21,18 @@ export default function Component() {
         </nav>
       </header>
       <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-primary">
-          <div className="container px-4 md:px-6">
+        <section className="relative w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-primary">
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            <img src="/gigly.png" alt="Gigly Background" className="object-cover w-full h-full opacity-50" />
+          </div>
+          <div className="container relative px-4 md:px-6 z-10">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none text-primary-foreground">
-                  Connect. Perform. Thrive.
-                </h1>
+              <h1 className="relative text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl text-orange-500">
+  <span className="absolute inset-0 text-white -translate-x-1 -translate-y-1">Connect. Perform. Thrive.</span>
+  Connect. Perform. Thrive.
+</h1>
                 <p className="mx-auto max-w-[700px] text-primary-foreground md:text-xl">
                   Gigly brings local artists and restaurants together, creating unforgettable experiences and boosting business.
                 </p>

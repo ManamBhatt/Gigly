@@ -14,34 +14,35 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog"
 import { Calendar as CalendarComponent } from "@/components/ui/calendar"
+import { useRouter } from 'next/navigation'; // Import the useRouter hook
 
 // Mock data for artists
 const artists = [
   {
     id: 1,
     name: "Jazz Ensemble",
-    image: "/placeholder.svg?height=100&width=100",
+    image: "/JE2.png",
     genres: ["Jazz", "Swing"],
     socialMedia: {
       instagram: "https://instagram.com/jazzensemble",
       facebook: "https://facebook.com/jazzensemble",
       youtube: "https://youtube.com/jazzensemble",
     },
-    videoClip: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    videoClip: "https://www.youtube.com/embed/WGTmrbv3kRU",
     phone: "+1 (555) 123-4567",
     email: "booking@jazzensemble.com",
   },
   {
     id: 2,
     name: "Rock Trio",
-    image: "/placeholder.svg?height=100&width=100",
+    image: "/rt.png",
     genres: ["Rock", "Alternative"],
     socialMedia: {
       instagram: "https://instagram.com/rocktrio",
       facebook: "https://facebook.com/rocktrio",
       youtube: "https://youtube.com/rocktrio",
     },
-    videoClip: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    videoClip: "https://www.youtube.com/embed/0wPxPW724cI",
     phone: "+1 (555) 987-6543",
     email: "booking@rocktrio.com",
   },
@@ -51,6 +52,7 @@ const artists = [
 export default function ArtistCatalogue() {
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date())
+  const router = useRouter(); // Initialize the router
 
   const filteredArtists = artists.filter((artist) =>
     artist.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -58,7 +60,15 @@ export default function ArtistCatalogue() {
 
   return (
     <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold mb-8">Gigly Artist Catalogue</h1>
+      {/* Flex container for button and header */}
+      <div className="flex items-center justify-between mb-4">
+        <h1 className="text-3xl font-bold">Gigly Artist Catalogue</h1>
+        {/* Button to navigate back to the homepage */}
+        <Button onClick={() => router.push('/')} className="ml-4">
+          Back to Homepage
+        </Button>
+      </div>
+
       <Input
         type="search"
         placeholder="Search artists..."
